@@ -1,6 +1,7 @@
-package google.codejam.y2k.round.qualification.africa
+package carna.google.codejam.y2k10.round.qualification.africa
 
 import spock.lang.Specification
+import spock.lang.Unroll
 
 import static org.hamcrest.core.IsEqual.equalTo
 import static spock.util.matcher.HamcrestSupport.expect
@@ -10,11 +11,11 @@ import static spock.util.matcher.HamcrestSupport.expect
  */
 class StoreCreditSpecification extends Specification {
 
-    def "load sample store credit file"() {
+    @Unroll
+    "load store credit file - #filename"() {
         given:
-        String filename = "store_credit_small"
-        URI inUri = this.class.getResource("/${filename}.in").toURI()
-        URI outUri = this.class.getResource("/${filename}.out").toURI()
+        URI inUri = this.class.getResource("${filename}.in").toURI()
+        URI outUri = this.class.getResource("${filename}.out").toURI()
 
 
         when:
@@ -24,6 +25,9 @@ class StoreCreditSpecification extends Specification {
         then:
         expect outfile.name, equalTo("${filename}.out" as String)
         expect outfile.text, equalTo(new File(outUri.path).text)
+
+        where:
+        filename << ['store-credit-sample', 'A-small-practice', 'A-large-practice']
 
     }
 

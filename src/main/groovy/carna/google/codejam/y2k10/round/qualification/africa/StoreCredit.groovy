@@ -1,4 +1,4 @@
-package google.codejam.y2k.round.qualification.africa
+package carna.google.codejam.y2k10.round.qualification.africa
 /**
  * Created by arthur on 25/12/2016.
  */
