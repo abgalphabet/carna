@@ -11,16 +11,21 @@ class Year2010AfricaQualificationRoundStoreCredit {
 
         List<List> solutions = specs.collect { Map test ->
             List<List> combinations = chooseK(test.noOfItems as int , 2)
-            combinations.find { c -> test.credit == test.priceOfItems[c[0]] + test.priceOfItems[c[1]] }
+            List solution = combinations.find { c -> test.credit == test.priceOfItems[c[0]] + test.priceOfItems[c[1]] }
+
+            solution[0] += 1
+            solution[1] += 1
+
+            solution
         }
 
-        def outfile = new File("${infile.name.split('\\.')[0]}.out")
-        outfile.withWriter('utf-8') { out ->
-            solutions.eachWithIndex { List solution, int i ->
-                List listStartsWtihOne = solution.collect { it + 1 }
-                out.writeLine "Case #${i + 1}: ${listStartsWtihOne.join(' ')}"
-            }
+        List content = []
+        solutions.eachWithIndex { List solution, int i ->
+            content << "Case #${i + 1}: ${solution.join(' ')}"
         }
+
+        File outfile = new File("${infile.name.split('\\.')[0]}.out")
+        outfile.withWriter('utf-8') { it.write content.join('\n') }
 
         outfile
     }
@@ -41,6 +46,7 @@ class Year2010AfricaQualificationRoundStoreCredit {
             }
         }
 
+        assert specs.size() == noOfTests
         specs
     }
 

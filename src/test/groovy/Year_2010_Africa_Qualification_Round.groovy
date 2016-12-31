@@ -21,7 +21,7 @@ class Year_2010_Africa_Qualification_Round extends Specification {
 
         then:
         expect outfile.name, equalTo("${filename}.out" as String)
-        expect outfile.text, equalTo(new File(outUri.path).text + '\n')
+        expect outfile.text, equalTo(new File(outUri.path).text)
 
     }
 
