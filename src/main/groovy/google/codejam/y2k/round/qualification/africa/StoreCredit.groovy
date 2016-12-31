@@ -1,16 +1,17 @@
+package google.codejam.y2k.round.qualification.africa
 /**
  * Created by arthur on 25/12/2016.
  */
-class Year2010AfricaQualificationRoundStoreCredit {
+class StoreCredit {
     static void main(String[] args) {
-        new Year2010AfricaQualificationRoundStoreCredit(args[0])
+        new StoreCredit(args[0])
     }
 
     File run(File infile) {
         List<Map> specs = parseSpec(infile)
 
         List<List> solutions = specs.collect { Map test ->
-            List<List> combinations = chooseK(test.noOfItems as int , 2)
+            List<List> combinations = chooseK(test.noOfItems as int, 2)
             List solution = combinations.find { c -> test.credit == test.priceOfItems[c[0]] + test.priceOfItems[c[1]] }
 
             solution[0] += 1
@@ -51,7 +52,7 @@ class Year2010AfricaQualificationRoundStoreCredit {
     }
 
     private List<List> chooseK(int n, int k) {
-        return chooseK((0..n-1) as int[], 0, n, k)
+        return chooseK((0..n - 1) as int[], 0, n, k)
     }
 
     private List<List> chooseK(int[] nums, int start, int n, int k) {
